@@ -880,25 +880,25 @@
             <hr class="rule reveal">
             <div class="pipeline reveal">
                 <div class="station">
-                    <span class="step">Step 1 → Job 1</span>
+                    <span class="step">Step 1</span>
                     <h3>Read</h3>
                     <p>Three models transcribe 2–5 h of audio per speaker — orthographic, Kurdish-script, and phoneme-level IPA.</p>
                     <span class="who ai">AI</span>
                 </div>
                 <div class="station">
-                    <span class="step">Step 2 → Job 2</span>
+                    <span class="step">Step 2</span>
                     <h3>Review</h3>
                     <p>Linguist checks quality, picks the best repetition, splits multi-word responses, re-runs noisy outputs.</p>
                     <span class="who human">Human</span>
                 </div>
                 <div class="station">
-                    <span class="step">Step 3 → Job 3</span>
+                    <span class="step">Step 3</span>
                     <h3>Locate</h3>
                     <p>Use verified anchors plus the transcript layers to find the right 85 target words in 530+.</p>
                     <span class="who ai">AI</span>
                 </div>
                 <div class="station">
-                    <span class="step">Step 4 → Job 4</span>
+                    <span class="step">Step 4</span>
                     <h3>Group cognates</h3>
                     <p>LexStat clusters forms using Levenshtein distance + sound correspondences learned from the data.</p>
                     <span class="who compute">Computational</span>
@@ -1034,12 +1034,35 @@
     </section>
 
     <!-- ===========================================
-         SLIDE 11 — WHAT BAYESIAN INFERENCE IS
+         SLIDE 11 — AI ALL THE WAY DOWN
+         The MCP tool layer means an AI agent (Claude, Codex, etc.)
+         can invoke any of the four pipeline jobs from a chat prompt,
+         plus all the setup and export work that surrounds the pipeline
+         (import wordlists, rename surveys, organize speakers, export data).
+         Audience takeaway: a researcher with basic AI literacy can drive
+         the same tooling a developer would, without writing code.
+         =========================================== -->
+    <section class="slide" data-folio="10 · AI ALL THE WAY DOWN" data-notes="One more thing about PARSE that is worth mentioning, especially for an audience like yours. The four jobs I just walked through are what AI does inside the analysis pipeline. But there is a layer below that — the setup work that surrounds any pipeline: importing wordlists, renaming surveys and speakers, organizing files, kicking off jobs, exporting data. PARSE exposes all of that, plus every pipeline job, through what is called the Model Context Protocol — a standard way of letting an AI agent call tools. In practice this means a researcher who has Claude or ChatGPT or any agent-capable AI on their machine can drive PARSE by typing instructions in plain language. They do not need to write code. They do not need to know the file layout. They say 'import this wordlist and run STT on the first speaker' and the agent does it. The principles I covered earlier still hold — the agent is a scout, the linguist judges, every output is a draft, every change is auditable. The point is that the bar to use this kind of tooling is lower than it used to be. A researcher with basic AI literacy can move at the speed of someone who knows the codebase, because the tools are already wired up.">
+        <div class="slide-content">
+            <p class="eyebrow reveal">Beyond the four jobs</p>
+            <h2 class="reveal">AI all the way down.</h2>
+            <hr class="rule reveal">
+            <ul class="bullets reveal">
+                <li><strong>Setup work, agent-driven.</strong> Import wordlists, rename surveys, organize speakers, kick off jobs, export data — all callable.</li>
+                <li><strong>Any pipeline job, from chat.</strong> Read, Review, Locate, Group cognates — the same four jobs an agent can invoke directly.</li>
+                <li><strong>No coding required.</strong> A researcher with basic AI literacy gets the same tooling a developer would.</li>
+                <li><strong>The principles still hold.</strong> Agent scouts. Linguist judges. Drafts, not commitments. Audit trail intact.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 12 — WHAT BAYESIAN INFERENCE IS
          Pull-quote + four principles. Parallels Slide 4 ("The principle")
          so the audience reads the analytic engine in the same visual
          rhythm as the human-in-the-loop principle.
          =========================================== -->
-    <section class="slide" data-folio="10 · THE METHOD" data-notes="Step four of the pipeline is where the dialect classification actually gets computed, and the method I use is called Bayesian inference. The simplest way to describe it to a non-specialist audience: it's like a confidence interval, but applied to trees. A traditional method — parsimony or maximum likelihood — picks one tree and calls it the answer. Bayesian inference instead produces a probability-weighted population of plausible trees. Each branching point on the consensus tree comes with a posterior probability — the proportion of sampled trees that contained that grouping. So instead of being told 'Kalhori and Khanaqini form a subgroup,' the analysis tells you 'Kalhori and Khanaqini form a subgroup in 87% of the sampled trees.' When the data is genuinely ambiguous — which contact-zone data always is — the method reports that honestly, by showing low posterior probabilities at the contested nodes. Uncertainty becomes part of the answer, not an embarrassment. One more thing to flag before we get to why this method fits the data: choosing Bayesian inference also changed what I needed from the rest of the pipeline. The next slide makes that bridge explicit.">
+    <section class="slide" data-folio="11 · THE METHOD" data-notes="Step four of the pipeline is where the dialect classification actually gets computed, and the method I use is called Bayesian inference. The simplest way to describe it to a non-specialist audience: it's like a confidence interval, but applied to trees. A traditional method — parsimony or maximum likelihood — picks one tree and calls it the answer. Bayesian inference instead produces a probability-weighted population of plausible trees. Each branching point on the consensus tree comes with a posterior probability — the proportion of sampled trees that contained that grouping. So instead of being told 'Kalhori and Khanaqini form a subgroup,' the analysis tells you 'Kalhori and Khanaqini form a subgroup in 87% of the sampled trees.' When the data is genuinely ambiguous — which contact-zone data always is — the method reports that honestly, by showing low posterior probabilities at the contested nodes. Uncertainty becomes part of the answer, not an embarrassment. One more thing to flag before we get to why this method fits the data: choosing Bayesian inference also changed what I needed from the rest of the pipeline. The next slide makes that bridge explicit.">
         <div class="slide-content">
             <p class="eyebrow reveal" style="text-align:center;">Step 4, in plain English</p>
             <p class="pull-quote reveal">Like a confidence interval —<br>but for <span class="accent">trees</span>.</p>
@@ -1069,12 +1092,12 @@
     </section>
 
     <!-- ===========================================
-         SLIDE 12 — WHY BAYESIAN FITS THIS PROJECT
+         SLIDE 13 — WHY BAYESIAN FITS THIS PROJECT
          Standard bullets pattern. Four compressed reasons drawn from
          seven longer notes — covering uncertainty, contact-zone modeling,
-         testable posteriors, and methodological lineage.
+         testable posteriors, and the precision-budget shift.
          =========================================== -->
-    <section class="slide" data-folio="11 · WHY IT FITS" data-notes="Four reasons this method fits this dataset specifically. First, sample-size honesty: with 11 speakers across 6 varieties, traditional methods produce a single tree with apparent confidence that the data doesn't actually support. Bayesian methods report what the evidence can carry — and where it cannot, they say so. Second, contact zones are exactly what the method was designed for — and I should credit the Zurich group here, Chundra Cathcart, Balthasar Bickel and colleagues, whose work on Bayesian phylolinguistics for West Iranian was built for precisely this kind of reticulated, contact-saturated situation. The framework can model horizontal transmission — borrowing, convergence — alongside vertical inheritance, and it allows different linguistic features to change at different speeds. That matters when lexicon, phonology, and morphology don't move together, which they don't in the Southern Zagros. Third, the output isn't a yes-or-no statement about whether Kalhori and Khanaqini belong together — it's a probability. Sixty years of scholarly disagreement gets reframed as a set of testable hypotheses, each with its own posterior support. Future fieldwork can update those probabilities; that's how the field moves forward. Fourth, and this is the methodological hinge that connects the research task to the tooling: the first approach to this dataset was Levenshtein distances on hand-transcribed IPA. That is a perfectly good method when you have the time to transcribe to publication quality. With eleven speakers and roughly thirty hours of audio between them, that is hundreds of hours of work per speaker — a year of full-time transcription before the first phylogeny could even be computed. The shift to Bayesian cognate detection was not only an upgrade in inferential power; it was a precision-budget shift. Cognate detection answers one question — is this the same word? — and that is a much lower bar than producing a publishable IPA string. Once that bar dropped, transcription stopped being the bottleneck — not because any single off-the-shelf model is now accurate enough, but because the orthographic layer and the IPA layer together, with linguist review on top, get close enough that the work becomes manageable. The pipeline I walked through earlier is what that drop made possible. PARSE is what that pipeline grew into.">
+    <section class="slide" data-folio="12 · WHY IT FITS" data-notes="Four reasons this method fits this dataset specifically. First, sample-size honesty: with 11 speakers across 6 varieties, traditional methods produce a single tree with apparent confidence that the data doesn't actually support. Bayesian methods report what the evidence can carry — and where it cannot, they say so. Second, contact zones are exactly what the method was designed for — and I should credit the Zurich group here, Chundra Cathcart, Balthasar Bickel and colleagues, whose work on Bayesian phylolinguistics for West Iranian was built for precisely this kind of reticulated, contact-saturated situation. The framework can model horizontal transmission — borrowing, convergence — alongside vertical inheritance, and it allows different linguistic features to change at different speeds. That matters when lexicon, phonology, and morphology don't move together, which they don't in the Southern Zagros. Third, the output isn't a yes-or-no statement about whether Kalhori and Khanaqini belong together — it's a probability. Sixty years of scholarly disagreement gets reframed as a set of testable hypotheses, each with its own posterior support. Future fieldwork can update those probabilities; that's how the field moves forward. Fourth, and this is the methodological hinge that connects the research task to the tooling: the first approach to this dataset was Levenshtein distances on hand-transcribed IPA. That is a perfectly good method when you have the time to transcribe to publication quality. With eleven speakers and roughly thirty hours of audio between them, that is hundreds of hours of work per speaker — a year of full-time transcription before the first phylogeny could even be computed. The shift to Bayesian cognate detection was not only an upgrade in inferential power; it was a precision-budget shift. Cognate detection answers one question — is this the same word? — and that is a much lower bar than producing a publishable IPA string. Once that bar dropped, transcription stopped being the bottleneck — not because any single off-the-shelf model is now accurate enough, but because the orthographic layer and the IPA layer together, with linguist review on top, get close enough that the work becomes manageable. The pipeline I walked through earlier is what that drop made possible. PARSE is what that pipeline grew into.">
         <div class="slide-content">
             <p class="eyebrow reveal">Why this method, for this data</p>
             <h2 class="reveal">Built for messy,<br>contested data.</h2>
@@ -1089,12 +1112,12 @@
     </section>
 
     <!-- ===========================================
-         SLIDE 13 — WHAT THE BAYESIAN OUTPUT LOOKS LIKE
+         SLIDE 14 — WHAT THE BAYESIAN OUTPUT LOOKS LIKE
          Two visualizations from the same posterior distribution:
          a rooted MCC tree with posterior probabilities at each node
          (left), and an unrooted radial display of the same data (right).
          =========================================== -->
-    <section class="slide" data-folio="12 · WHAT IT LOOKS LIKE" data-notes="This is what the output of a Bayesian phylogenetic analysis actually looks like. The version on the left is a rooted tree — what we call the Maximum Clade Credibility tree. Each internal node has a number, the posterior probability, which tells you what proportion of sampled trees from the analysis contained that exact grouping. Numbers close to 1 mean the data strongly supports that split — look at the 0.9999 binding Erbil with the Bahdini and Diyarbakir Northern Kurdish varieties, or the 1.0 for the Gorani pair. Numbers around 0.5 or 0.7 mean the data is genuinely uncertain — that 0.5675 for the Kalhori-Qorve grouping is honest about how hard that particular split is to resolve with the available evidence. The visualization on the right is the same data shown without an imposed root — useful when you want to see the structure of the relationships without committing to where the tree starts. Both are produced from the same posterior distribution; they're two different ways of looking at the same statistical answer. The point to take from this slide is that the output is not a single tree. It is a population of trees, summarised here as a consensus, with confidence attached to every branching decision. Where the numbers are high, the data is saying something firm. Where they are low, the data is being honest about its own limits — and that is exactly what we asked the method for.">
+    <section class="slide" data-folio="13 · WHAT IT LOOKS LIKE" data-notes="This is what the output of a Bayesian phylogenetic analysis actually looks like. The version on the left is a rooted tree — what we call the Maximum Clade Credibility tree. Each internal node has a number, the posterior probability, which tells you what proportion of sampled trees from the analysis contained that exact grouping. Numbers close to 1 mean the data strongly supports that split — look at the 0.9999 binding Erbil with the Bahdini and Diyarbakir Northern Kurdish varieties, or the 1.0 for the Gorani pair. Numbers around 0.5 or 0.7 mean the data is genuinely uncertain — that 0.5675 for the Kalhori-Qorve grouping is honest about how hard that particular split is to resolve with the available evidence. The visualization on the right is the same data shown without an imposed root — useful when you want to see the structure of the relationships without committing to where the tree starts. Both are produced from the same posterior distribution; they're two different ways of looking at the same statistical answer. The point to take from this slide is that the output is not a single tree. It is a population of trees, summarised here as a consensus, with confidence attached to every branching decision. Where the numbers are high, the data is saying something firm. Where they are low, the data is being honest about its own limits — and that is exactly what we asked the method for.">
         <div class="slide-content">
             <p class="eyebrow reveal">From the engine, visually</p>
             <h2 class="reveal">What the output<br>actually looks like.</h2>
@@ -1115,9 +1138,9 @@
     </section>
 
     <!-- ===========================================
-         SLIDE 14 — THE HONEST LEDGER
+         SLIDE 15 — THE HONEST LEDGER
          =========================================== -->
-    <section class="slide" data-folio="13 · THE HONEST LEDGER" data-notes="What I get out of this is a clean, complete character matrix and an honest report on how confident the data lets me be about each branching point in the tree. What I do not claim is that the AI did the linguistics. It found things, it proposed things, and it flagged when it was uncertain. The interpretation is still mine, and so is the responsibility for it.">
+    <section class="slide" data-folio="14 · THE HONEST LEDGER" data-notes="What I get out of this is a clean, complete character matrix and an honest report on how confident the data lets me be about each branching point in the tree. What I do not claim is that the AI did the linguistics. It found things, it proposed things, and it flagged when it was uncertain. The interpretation is still mine, and so is the responsibility for it.">
         <div class="slide-content">
             <p class="eyebrow reveal">What this delivers — and what it doesn't claim</p>
             <h2 class="reveal">The honest ledger.</h2>
@@ -1146,9 +1169,9 @@
     </section>
 
     <!-- ===========================================
-         SLIDE 15 — TAKEAWAY
+         SLIDE 16 — TAKEAWAY
          =========================================== -->
-    <section class="slide" data-folio="14 · TAKEAWAY" data-notes="I want to close on the part of this that is not specific to historical linguistics. In language assessment, the rater's judgment is the result — it is not a fact that exists independently and can be checked. That makes audit trails and second opinions more valuable than raw transcription accuracy. The pattern I've shown you — scout, second opinion, human-owned decision, full provenance — is a portable one. It is what I would want any AI to do in any context where the linguist's name ends up on the final product. One last thing — PARSE is the tool, the Southern Kurdish classification is the research, and the two are separable. If the tool helps your work, take it. If only the principle transfers, take that. Thank you. I'm happy to take questions.">
+    <section class="slide" data-folio="15 · TAKEAWAY" data-notes="I want to close on the part of this that is not specific to historical linguistics. In language assessment, the rater's judgment is the result — it is not a fact that exists independently and can be checked. That makes audit trails and second opinions more valuable than raw transcription accuracy. The pattern I've shown you — scout, second opinion, human-owned decision, full provenance — is a portable one. It is what I would want any AI to do in any context where the linguist's name ends up on the final product. One last thing — PARSE is the tool, the Southern Kurdish classification is the research, and the two are separable. If the tool helps your work, take it. If only the principle transfers, take that. Thank you. I'm happy to take questions.">
         <div class="slide-content">
             <div class="closing">
                 <p class="eyebrow reveal" style="text-align:center;">For language assessment</p>
